@@ -1,4 +1,4 @@
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000/api";
+const API_BASE_URL = "https://emoscene-backend.onrender.com/api";
 
 const parseResponse = async (res) => {
     const contentType = res.headers.get("content-type") || "";
@@ -26,7 +26,7 @@ export const authAPI = {
             body: JSON.stringify(data),
             credentials: "include",
         });
-        return res.json();
+        return parseResponse(res);
     },
 
     login: async (data) => {
@@ -36,7 +36,7 @@ export const authAPI = {
             body: JSON.stringify(data),
             credentials: "include",
         });
-        return res.json();
+        return parseResponse(res);
     },
 
     logout: async () => {
@@ -44,7 +44,7 @@ export const authAPI = {
             method: "POST",
             credentials: "include",
         });
-        return res.json();
+        return parseResponse(res);
     },
 
     getMe: async (token) => {
@@ -54,7 +54,7 @@ export const authAPI = {
             },
             credentials: "include",
         });
-        return res.json();
+        return parseResponse(res);
     },
 
     forgotPassword: async (email) => {
@@ -63,7 +63,7 @@ export const authAPI = {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ email }),
         });
-        return res.json();
+        return parseResponse(res);
     },
 
     resetPassword: async (token, password) => {
@@ -72,7 +72,7 @@ export const authAPI = {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ password }),
         });
-        return res.json();
+        return parseResponse(res);
     },
 };
 
@@ -84,21 +84,21 @@ export const productAPI = {
             `${API_BASE_URL}/products?${query}`,
             { credentials: "include" }
         );
-        return res.json();
+        return parseResponse(res);
     },
 
     getFeaturedProducts: async () => {
         const res = await fetch(`${API_BASE_URL}/products/featured`, {
             credentials: "include",
         });
-        return res.json();
+        return parseResponse(res);
     },
 
     getProductById: async (id) => {
         const res = await fetch(`${API_BASE_URL}/products/${id}`, {
             credentials: "include",
         });
-        return res.json();
+        return parseResponse(res);
     },
 
     addProduct: async (formData, token) => {
@@ -110,7 +110,7 @@ export const productAPI = {
             body: formData,
             credentials: "include",
         });
-        return res.json();
+        return parseResponse(res);
     },
 
     updateProduct: async (id, formData, token) => {
@@ -133,7 +133,7 @@ export const productAPI = {
             },
             credentials: "include",
         });
-        return res.json();
+        return parseResponse(res);
     },
 
     trackWhatsappClick: async (id) => {
@@ -141,7 +141,7 @@ export const productAPI = {
             method: "PUT",
             credentials: "include",
         });
-        return res.json();
+        return parseResponse(res);
     },
 };
 
@@ -157,7 +157,7 @@ export const orderAPI = {
             body: JSON.stringify(data),
             credentials: "include",
         });
-        return res.json();
+        return parseResponse(res);
     },
 
     getUserOrders: async (token) => {
@@ -167,7 +167,7 @@ export const orderAPI = {
             },
             credentials: "include",
         });
-        return res.json();
+        return parseResponse(res);
     },
 
     getOrderById: async (id, token) => {
@@ -177,7 +177,7 @@ export const orderAPI = {
             },
             credentials: "include",
         });
-        return res.json();
+        return parseResponse(res);
     },
 
     getAllOrders: async (token) => {
@@ -187,7 +187,7 @@ export const orderAPI = {
             },
             credentials: "include",
         });
-        return res.json();
+        return parseResponse(res);
     },
 
     updateOrderStatus: async (id, status, token) => {
@@ -200,7 +200,7 @@ export const orderAPI = {
             body: JSON.stringify({ status }),
             credentials: "include",
         });
-        return res.json();
+        return parseResponse(res);
     },
 
     deleteOrder: async (id, token) => {
@@ -211,7 +211,7 @@ export const orderAPI = {
             },
             credentials: "include",
         });
-        return res.json();
+        return parseResponse(res);
     },
 };
 
@@ -227,14 +227,14 @@ export const reviewAPI = {
             body: JSON.stringify(data),
             credentials: "include",
         });
-        return res.json();
+        return parseResponse(res);
     },
 
     getProductReviews: async (productId) => {
         const res = await fetch(`${API_BASE_URL}/reviews/${productId}`, {
             credentials: "include",
         });
-        return res.json();
+        return parseResponse(res);
     },
 
     deleteReview: async (id, token) => {
@@ -245,7 +245,7 @@ export const reviewAPI = {
             },
             credentials: "include",
         });
-        return res.json();
+        return parseResponse(res);
     },
 };
 
@@ -259,7 +259,7 @@ export const wishlistAPI = {
             },
             credentials: "include",
         });
-        return res.json();
+        return parseResponse(res);
     },
 
     getWishlist: async (token) => {
@@ -269,7 +269,7 @@ export const wishlistAPI = {
             },
             credentials: "include",
         });
-        return res.json();
+        return parseResponse(res);
     },
 
     removeFromWishlist: async (productId, token) => {
@@ -280,7 +280,7 @@ export const wishlistAPI = {
             },
             credentials: "include",
         });
-        return res.json();
+        return parseResponse(res);
     },
 };
 
@@ -293,7 +293,7 @@ export const userAPI = {
             },
             credentials: "include",
         });
-        return res.json();
+        return parseResponse(res);
     },
 
     updateProfile: async (data, token) => {
@@ -306,7 +306,7 @@ export const userAPI = {
             body: JSON.stringify(data),
             credentials: "include",
         });
-        return res.json();
+        return parseResponse(res);
     },
 
     deleteAccount: async (token) => {
@@ -317,7 +317,7 @@ export const userAPI = {
             },
             credentials: "include",
         });
-        return res.json();
+        return parseResponse(res);
     },
 
     getDashboard: async (token) => {
@@ -327,7 +327,7 @@ export const userAPI = {
             },
             credentials: "include",
         });
-        return res.json();
+        return parseResponse(res);
     },
 };
 
@@ -343,7 +343,7 @@ export const adminAPI = {
                 credentials: "include",
             }
         );
-        return res.json();
+        return parseResponse(res);
     },
 
     toggleBlockUser: async (userId, token) => {
@@ -354,7 +354,7 @@ export const adminAPI = {
             },
             credentials: "include",
         });
-        return res.json();
+        return parseResponse(res);
     },
 
     deleteUser: async (userId, token) => {
@@ -365,7 +365,7 @@ export const adminAPI = {
             },
             credentials: "include",
         });
-        return res.json();
+        return parseResponse(res);
     },
 
     toggleFeaturedProduct: async (productId, token) => {
@@ -379,7 +379,7 @@ export const adminAPI = {
                 credentials: "include",
             }
         );
-        return res.json();
+        return parseResponse(res);
     },
 
     toggleProductStatus: async (productId, token) => {
@@ -393,7 +393,7 @@ export const adminAPI = {
                 credentials: "include",
             }
         );
-        return res.json();
+        return parseResponse(res);
     },
 
     updateProductStock: async (productId, stock, token) => {
@@ -409,7 +409,7 @@ export const adminAPI = {
                 credentials: "include",
             }
         );
-        return res.json();
+        return parseResponse(res);
     },
 
     getLowStockProducts: async (token) => {
@@ -419,12 +419,12 @@ export const adminAPI = {
             },
             credentials: "include",
         });
-        return res.json();
+        return parseResponse(res);
     },
 
     searchOrders: async (query, token) => {
         const res = await fetch(
-            `${API_BASE_URL}/admin/orders/search?query=${query}`,
+            `${API_BASE_URL}/admin/orders/search?search=${query}`,
             {
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -432,7 +432,7 @@ export const adminAPI = {
                 credentials: "include",
             }
         );
-        return res.json();
+        return parseResponse(res);
     },
 };
 
@@ -445,7 +445,7 @@ export const analyticsAPI = {
             body: JSON.stringify(data),
             credentials: "include",
         });
-        return res.json();
+        return parseResponse(res);
     },
 
     getDashboardStats: async (token) => {
@@ -455,7 +455,7 @@ export const analyticsAPI = {
             },
             credentials: "include",
         });
-        return res.json();
+        return parseResponse(res);
     },
 
     getDailyVisitors: async (token) => {
@@ -465,7 +465,7 @@ export const analyticsAPI = {
             },
             credentials: "include",
         });
-        return res.json();
+        return parseResponse(res);
     },
 
     getTopViewedProducts: async (token) => {
@@ -478,7 +478,7 @@ export const analyticsAPI = {
                 credentials: "include",
             }
         );
-        return res.json();
+        return parseResponse(res);
     },
 
     getTopWhatsappProducts: async (token) => {
@@ -491,7 +491,7 @@ export const analyticsAPI = {
                 credentials: "include",
             }
         );
-        return res.json();
+        return parseResponse(res);
     },
 
     getRecentUsers: async (token) => {
@@ -501,7 +501,7 @@ export const analyticsAPI = {
             },
             credentials: "include",
         });
-        return res.json();
+        return parseResponse(res);
     },
 
     getRecentOrders: async (token) => {
@@ -511,6 +511,6 @@ export const analyticsAPI = {
             },
             credentials: "include",
         });
-        return res.json();
+        return parseResponse(res);
     },
 };
